@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float jumpForce = 800;
     public float maxSpeed = 15;
+    public bool movableCamera = true;
     
     private bool grounded = true;
     private Rigidbody2D rb;
@@ -19,13 +20,14 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //grounded = (rb.velocity.y <= 0.1);
         grounded = Physics2D.Linecast(transform.position, transform.Find("GroundCheck").position, 1 << LayerMask.NameToLayer("Ground"));
 
         float input = Input.GetAxis("Horizontal");
 
+        // Move player depending on input
         rb.velocity = new Vector2(input * maxSpeed, rb.velocity.y);
 
+        // Flip image depending on moving direction
         if (input > 0 && !facingRight) {
             Flip();
         }
@@ -33,10 +35,14 @@ public class PlayerController : MonoBehaviour {
             Flip();
         }
 
-
+        // Jump mechanic
         if (Input.GetButtonDown("Jump") && grounded)
         {
             rb.AddForce(Vector2.up * jumpForce);
+        }
+
+        if (movableCamera) {
+            moveCamera();
         }
 	}
 
@@ -48,14 +54,12 @@ public class PlayerController : MonoBehaviour {
         transform.localScale = theScale;
     }
     
-    /* 
-     * Not used yet. Maybe for later (as soon as the level gets bigger than one screen).
     void moveCamera()
     {
-        if (transform.position.x > 0 && transform.position.x < 68)
+        if (transform.position.x > -42 && transform.position.x < 42)
         {
-            Vector3 x = new Vector3(transform.position.x, -0.22f, -10);
+            Vector3 x = new Vector3(transform.position.x, 0f, -10);
             GameObject.Find("Main Camera").transform.position = x;
         }
-    } */
+    }
 }
