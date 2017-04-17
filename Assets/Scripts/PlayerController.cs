@@ -47,4 +47,15 @@ public class PlayerController : MonoBehaviour {
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+    
+    /* 
+     * Not used yet. Maybe for later (as soon as the level gets bigger than one screen).
+    void moveCamera()
+    {
+        if (transform.position.x > 0 && transform.position.x < 68)
+        {
+            Vector3 x = new Vector3(transform.position.x, -0.22f, -10);
+            GameObject.Find("Main Camera").transform.position = x;
+        }
+    } */
 }
