@@ -7,6 +7,11 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce = 800;
     public float maxSpeed = 15;
     public bool movableCamera = true;
+
+  public GameObject leftBoundary;
+  public GameObject rightBoundary;
+  private float leftBound;
+  private float rightBound;
     
     private bool grounded = true;
     private Rigidbody2D rb;
@@ -15,7 +20,17 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
-	}
+    if (leftBoundary != null)
+      leftBound = leftBoundary.transform.position.x;
+    else
+      leftBound = 22;
+
+    if (rightBoundary != null)
+      rightBound = rightBoundary.transform.position.x;
+    else
+      rightBound = 52;
+
+  }
 
     // Update is called once per frame
     void Update()
@@ -56,7 +71,7 @@ public class PlayerController : MonoBehaviour {
     
     void moveCamera()
     {
-        if (transform.position.x > -42 && transform.position.x < 42)
+        if (transform.position.x > leftBound && transform.position.x < rightBound)
         {
             Vector3 x = new Vector3(transform.position.x, 0f, -10);
             GameObject.Find("Main Camera").transform.position = x;
