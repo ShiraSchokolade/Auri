@@ -18,7 +18,6 @@ public class MoonConnection : MonoBehaviour
   private bool isConnected;
   private Vector3[] segments;   // holds the positions of all segments
 
-  private float segmentMoveAmount = 1f;
   private float playerMoveAmount = 0f;
   private float lastXPosition = 0f;
 

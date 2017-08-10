@@ -15,6 +15,9 @@ public class Constants : MonoBehaviour {
   // Layer
   public static string LAYER_GROUND = "Ground";
 
+  // Tags
+  public static string TAG_PLAYER = "Player";
+
   // Scenes 
   public static string LEVEL1 = "Level1";
 
