@@ -19,6 +19,7 @@ public class Constants : MonoBehaviour {
   public static string TAG_PLAYER = "Player";
 
   // Scenes 
+  public static string MAINMENU = "Menu";
   public static string LEVEL1 = "Level1";
 
 }
