@@ -11,6 +11,7 @@ public class Constants : MonoBehaviour {
   // Input
   public static string INPUT_HORIZON = "Horizontal";
   public static string INPUT_JUMP = "Jump";
+    public static string INPUT_TOGGLE_CONNECTION = "ToggleConnection";
 
   // Layer
   public static string LAYER_GROUND = "Ground";

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class IngameUI : MonoBehaviour {
 
   private PlayerController player;
+    private MoonConnection moonConnection;
   public Text eneruText;
   public Text toggleConnectionButtonText;
 
@@ -13,14 +14,20 @@ public class IngameUI : MonoBehaviour {
   void Start () {
 
     player = GameObject.FindWithTag(Constants.TAG_PLAYER).GetComponent<PlayerController>();
+        moonConnection = GameObject.FindWithTag(Constants.TAG_PLAYER).GetComponent<MoonConnection>();
 
-    UpdateEneruUI();
+        UpdateEneruUI();
   }
 	
 	void Update () {
 
     UpdateEneruUI();
+
+        if (Input.GetButtonDown(Constants.INPUT_TOGGLE_CONNECTION))
+            ToggleConnection();
+
 	}
+
 
   void UpdateEneruUI()
   {
@@ -36,6 +43,6 @@ public class IngameUI : MonoBehaviour {
     else
       toggleConnectionButtonText.text = "Create";
 
-    player.ToggleMoonString();
+    moonConnection.ToggleMoonString();
   }
 }
