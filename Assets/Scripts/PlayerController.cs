@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
   // public variables
   public float jumpForce = 800;
   public float maxSpeed = 4f;
-    public float slowSpeed = 1f;
+  public float slowSpeed = 1f;
 
   // side boundaries
   public GameObject leftBoundary;
@@ -17,34 +17,34 @@ public class PlayerController : MonoBehaviour
   private float leftBound;
   private float rightBound;
 
-    // movement
-    private float speed;
+  // movement
+  private float speed;
   private bool grounded = true;
   private Rigidbody2D rb;
   private bool facingRight = true;
   private Camera mainCamera;
   private float input = 0;
 
-    [Header("Eneru")]
-    //[HideInInspector]
-    public int eneru = 10;   // 0: empty, 100: full
+  [Header("Eneru")]
+  //[HideInInspector]
+  public int eneru = 10;   // 0: empty, 100: full
 
-    private float timer = 0;
+  private float timer = 0;
   public float tickTimeInSeconds = 1f;
   public int eneruRaisePerTick = 10;
-    public int eneruMax = 100;
-    public int eneruTreshhold = 40;
-    public float minAlphaValue = 0.4f;
+  public int eneruMax = 100;
+  public int eneruTreshhold = 40;
+  public float minAlphaValue = 0.4f;
 
-    private MoonConnection moonConnection;
-    public bool isConnected = true;
+  private MoonConnection moonConnection;
+  public bool isConnected = true;
 
-    void Start()
+  void Start()
   {
     // find components
     rb = GetComponent<Rigidbody2D>();
     mainCamera = GameObject.Find(Constants.CAMERA).GetComponent<Camera>();
-        moonConnection = GetComponent<MoonConnection>();
+    moonConnection = GetComponent<MoonConnection>();
 
     // check boundaries
     if (leftBoundary != null)
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     else
       rightBound = 52;
 
-        speed = slowSpeed;
+    speed = slowSpeed;
 
   }
 
@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour
     }
     else
     {
-            // stop movement of moonstring
-            moonConnection.StopMovement();
+      // stop movement of moonstring
+      moonConnection.StopMovement();
     }
 
     // rotate and scale Moonstring
@@ -124,14 +124,14 @@ public class PlayerController : MonoBehaviour
   /// </summary>
   void MoveCamera()
   {
-        if (transform.position.x > leftBound && transform.position.x < rightBound)
-        {
-            Vector3 x = new Vector3(transform.position.x, 0f, -10);
-            mainCamera.transform.position = x;
-            moonConnection.MoveMoonstring(input);
-        }
-        else
-            moonConnection.StopMovement();
+    if (transform.position.x > leftBound && transform.position.x < rightBound)
+    {
+      Vector3 x = new Vector3(transform.position.x, 0f, -10);
+      mainCamera.transform.position = x;
+      moonConnection.MoveMoonstring(input);
+    }
+    else
+      moonConnection.StopMovement();
   }
 
   void UpdateEneru()
@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
             timer += Time.deltaTime;
           else
           {
-                        RaiseEneru(eneruRaisePerTick);
+            RaiseEneru(eneruRaisePerTick);
             timer = 0;
           }
         }
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
           timer += Time.deltaTime;
         else
         {
-                    LowerEneru(eneruRaisePerTick);
+          LowerEneru(eneruRaisePerTick);
           timer = 0;
         }
       }
@@ -172,59 +172,59 @@ public class PlayerController : MonoBehaviour
     }
 
     // check if eneru reached a threshold which influences movement speed for example
-        CheckEneruTreshholds();
+    CheckEneruTreshholds();
   }
 
-    public void RaiseEneru(int amount)
+  public void RaiseEneru(int amount)
+  {
+    if (eneru < eneruMax)
     {
-        if (eneru < eneruMax)
-        {
-            eneru += amount;
-            if (eneru > eneruMax)
-                eneru = eneruMax;
-        }         
+      eneru += amount;
+      if (eneru > eneruMax)
+        eneru = eneruMax;
     }
+  }
 
-    private void LowerEneru(int amount)
+  private void LowerEneru(int amount)
+  {
+    eneru -= amount;
+  }
+
+  private void CheckEneruTreshholds()
+  {
+    if (eneru > eneruTreshhold)
     {
-        eneru -= amount;
+      speed = maxSpeed;
+      FadeInAuri();
     }
-
-    private void CheckEneruTreshholds()
+    else
     {
-        if(eneru > eneruTreshhold)
-        {
-            speed = maxSpeed;
-            FadeInAuri();
-        }
-        else
-        {
-            speed = slowSpeed;
-            FadeOutAuri();
-        }
+      speed = slowSpeed;
+      FadeOutAuri();
     }
+  }
 
-    private void FadeOutAuri()
+  private void FadeOutAuri()
+  {
+    Color color = GetComponent<SpriteRenderer>().color;
+
+    if (color.a > minAlphaValue)
     {
-        Color color = GetComponent<SpriteRenderer>().color;
-
-        if (color.a > minAlphaValue)
-        {
-            color.a = (eneru / 10f) * 0.2f;
-            GetComponent<SpriteRenderer>().color = color;
-        }
-        else
-        {
-            color.a = (eneru / 10f) * 0.5f;
-            GetComponent<SpriteRenderer>().color = color;
-        }
+      color.a = (eneru / 10f) * 0.2f;
+      GetComponent<SpriteRenderer>().color = color;
     }
-
-    private void FadeInAuri()
+    else
     {
-        Color color = GetComponent<SpriteRenderer>().color;
-        
-        color.a = 100f;
-        GetComponent<SpriteRenderer>().color = color;
+      color.a = (eneru / 10f) * 0.5f;
+      GetComponent<SpriteRenderer>().color = color;
     }
+  }
+
+  private void FadeInAuri()
+  {
+    Color color = GetComponent<SpriteRenderer>().color;
+
+    color.a = 100f;
+    GetComponent<SpriteRenderer>().color = color;
+  }
 }
