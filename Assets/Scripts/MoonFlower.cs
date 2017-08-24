@@ -2,23 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoonFlower : MonoBehaviour {
+public class MoonFlower : MonoBehaviour
+{
+  public int eneruRaise = 50;
+  public int coolDown = 5;
+  public Sprite enabledSprite;
+  public Sprite disabledSprite;
 
-    public int eneruRaise = 50;
-    private PlayerController player;
+  private PlayerController player;
+  private bool interactable = true;
 
-    void Start () {
+  void Start()
+  {
+    player = GameObject.FindWithTag(Constants.TAG_PLAYER).GetComponent<PlayerController>();
 
-        player = GameObject.FindWithTag(Constants.TAG_PLAYER).GetComponent<PlayerController>();
-    }
-	
-	void Update () {
-		
-	}
+    if (enabledSprite == null || disabledSprite == null)
+      Debug.Log("you didn't assign sprites to the moonflower");
+  }
 
-    private void OnTriggerEnter2D(Collider2D col)
+  void Update()
+  {
+
+  }
+
+  private void OnTriggerEnter2D(Collider2D col)
+  {
+    if ( interactable && col.tag == Constants.TAG_PLAYER)
     {
-        if (col.tag == Constants.TAG_PLAYER)
-            player.RaiseEneru(eneruRaise);
+      player.RaiseEneru(eneruRaise);
+      StartCoroutine(PerformCooldown());
     }
+  }
+
+  private IEnumerator PerformCooldown()
+  {
+    DisableFlower();
+
+    //float timer = 0;
+
+    yield return new WaitForSecondsRealtime(coolDown);
+
+    //while(timer < coolDown)
+    //{
+    //  timer += Time.deltaTime;
+    //}
+    EnableFlower();
+  }
+
+  private void DisableFlower()
+  {
+    print("disable");
+    interactable = false;
+    GetComponent<SpriteRenderer>().sprite = disabledSprite;
+  }
+
+  private void EnableFlower()
+  {
+    print("enable");
+    interactable = true;
+    GetComponent<SpriteRenderer>().sprite = enabledSprite;
+  }
 }
