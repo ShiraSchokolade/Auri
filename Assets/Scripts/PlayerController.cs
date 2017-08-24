@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
   private MoonConnection moonConnection;
   public bool isConnected = true;
 
+  private float oldAuriPosition;
+  private float currentAuriPosition;
+    
+
   void Start()
   {
     // find components
@@ -58,12 +62,15 @@ public class PlayerController : MonoBehaviour
       rightBound = 52;
 
     speed = slowSpeed;
-
+    oldAuriPosition = currentAuriPosition = transform.position.x;
   }
 
 
   void Update()
   {
+    // save currrent x-position
+    currentAuriPosition = transform.position.x;
+
     // groundCheck
     grounded = Physics2D.Linecast(transform.position, transform.Find(Constants.GROUNDCHECK).position, 1 << LayerMask.NameToLayer(Constants.LAYER_GROUND));
 
@@ -87,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
       // move Camera and Moonstring
       MoveCamera();
+
+      oldAuriPosition = transform.position.x;
     }
     else
     {
@@ -119,7 +128,7 @@ public class PlayerController : MonoBehaviour
   }
 
   /// <summary>
-  /// moves camera in between left and right Bounds
+  /// moves camera in between left and right Bounds,
   /// move moonstring
   /// </summary>
   void MoveCamera()
@@ -127,11 +136,17 @@ public class PlayerController : MonoBehaviour
     if (transform.position.x > leftBound && transform.position.x < rightBound)
     {
       Vector3 x = new Vector3(transform.position.x, 0f, -10);
-      mainCamera.transform.position = x;
-      moonConnection.MoveMoonstring(input);
+      mainCamera.transform.position = x; 
+      moonConnection.MoveMoonstring(CalculatePositionChange());
     }
     else
       moonConnection.StopMovement();
+  }
+
+  float CalculatePositionChange()
+  {
+    float positionChange =  currentAuriPosition - oldAuriPosition;
+    return positionChange;
   }
 
   void UpdateEneru()
