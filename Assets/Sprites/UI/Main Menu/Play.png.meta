@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: db29a6b514c8f9941b3e775cf5db0bc9
-timeCreated: 1503605117
+timeCreated: 1503856647
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -39,7 +39,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 37, y: 45, z: 74, w: 31}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -58,37 +58,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Standalone
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: -38, y: 8.5}
-      - {x: -45, y: 6.5}
-      - {x: -57, y: -1.5}
-      - {x: -57, y: -13.5}
-      - {x: -56, y: -17.5}
-      - {x: -47, y: -17.5}
-      - {x: -34, y: -6.5}
-      - {x: -32, y: -2.5}
-      - {x: -32, y: 8.5}
-    - - {x: -9, y: 30.5}
-      - {x: -28, y: 30.5}
-      - {x: -36, y: 29.5}
-      - {x: -39, y: 26.5}
-      - {x: -39, y: 12.5}
-      - {x: -36, y: 4.5}
-      - {x: 14, y: 4.5}
-      - {x: 17, y: 10.5}
-      - {x: 17, y: 22.5}
-      - {x: 15, y: 26.5}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

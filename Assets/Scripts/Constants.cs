@@ -23,4 +23,7 @@ public class Constants : MonoBehaviour {
   public static string MAINMENU = "Menu";
   public static string LEVEL1 = "Level1";
 
+  // Animation Parameters 
+  public static string AURI_SPEED = "speed";
+  public static string AURI_GROUNDED = "grounded";
 }

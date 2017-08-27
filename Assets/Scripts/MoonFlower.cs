@@ -51,14 +51,12 @@ public class MoonFlower : MonoBehaviour
 
   private void DisableFlower()
   {
-    print("disable");
     interactable = false;
     GetComponent<SpriteRenderer>().sprite = disabledSprite;
   }
 
   private void EnableFlower()
   {
-    print("enable");
     interactable = true;
     GetComponent<SpriteRenderer>().sprite = enabledSprite;
   }

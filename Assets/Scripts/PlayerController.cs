@@ -41,7 +41,9 @@ public class PlayerController : MonoBehaviour
 
   private float oldAuriPosition;
   private float currentAuriPosition;
-    
+
+  private Animator anim;
+
 
   void Start()
   {
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
     rb = GetComponent<Rigidbody2D>();
     mainCamera = GameObject.Find(Constants.CAMERA).GetComponent<Camera>();
     moonConnection = GetComponent<MoonConnection>();
+    anim = GetComponent<Animator>();
 
     // check boundaries
     if (leftBoundary != null)
@@ -73,9 +76,14 @@ public class PlayerController : MonoBehaviour
 
     // groundCheck
     grounded = Physics2D.Linecast(transform.position, transform.Find(Constants.GROUNDCHECK).position, 1 << LayerMask.NameToLayer(Constants.LAYER_GROUND));
+    anim.SetBool(Constants.AURI_GROUNDED, grounded);
+
+    if (!grounded && transform.position.y < -5)
+      Die();
 
     // Move player depending on input
     input = Input.GetAxis(Constants.INPUT_HORIZON);
+    anim.SetFloat(Constants.AURI_SPEED, Mathf.Abs(input));
 
     // only move if there is an input
     if (input != 0)
@@ -183,11 +191,16 @@ public class PlayerController : MonoBehaviour
     // die when eneru is empty
     else
     {
-      SceneManager.LoadScene(Constants.MAINMENU);
+      Die();
     }
 
     // check if eneru reached a threshold which influences movement speed for example
     CheckEneruTreshholds();
+  }
+
+  private void Die()
+  {
+    SceneManager.LoadScene(Constants.MAINMENU);
   }
 
   public void RaiseEneru(int amount)
