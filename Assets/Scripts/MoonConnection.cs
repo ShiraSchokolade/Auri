@@ -84,4 +84,16 @@ public class MoonConnection : MonoBehaviour
 
     moonString.GetComponent<SpriteRenderer>().color = color;
   }
+
+  public void ToggleMoonString2(bool connect)
+  {
+    //moonString.SetActive(!moonString.activeSelf);
+    Color color = moonString.GetComponent<SpriteRenderer>().color;
+    if (connect)
+      color.a = 100f;
+    else
+      color.a = 0f;
+
+    moonString.GetComponent<SpriteRenderer>().color = color;
+  }
 }

@@ -27,17 +27,18 @@ public class PlayerController : MonoBehaviour
 
   [Header("Eneru")]
   //[HideInInspector]
-  public int eneru = 10;   // 0: empty, 100: full
+  public float eneru = 10f;   // 0: empty, 100: full
 
   private float timer = 0;
   public float tickTimeInSeconds = 1f;
-  public int eneruRaisePerTick = 10;
-  public int eneruMax = 100;
-  public int eneruTreshhold = 40;
+  public float eneruRaisePerTick = 10f;
+  public float eneruMax = 100f;
+  public float eneruTreshhold = 40f;
   public float minAlphaValue = 0.4f;
 
   private MoonConnection moonConnection;
   public bool isConnected = true;
+  public bool connectionPossible = true;
 
   private float oldAuriPosition;
   private float currentAuriPosition;
@@ -203,7 +204,7 @@ public class PlayerController : MonoBehaviour
     SceneManager.LoadScene(Constants.MAINMENU);
   }
 
-  public void RaiseEneru(int amount)
+  public void RaiseEneru(float amount)
   {
     if (eneru < eneruMax)
     {
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour
     }
   }
 
-  private void LowerEneru(int amount)
+  private void LowerEneru(float amount)
   {
     eneru -= amount;
   }

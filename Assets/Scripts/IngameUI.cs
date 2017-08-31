@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class IngameUI : MonoBehaviour
 {
@@ -55,16 +56,48 @@ public class IngameUI : MonoBehaviour
 
   public void ToggleConnection()
   {
-    player.isConnected = !player.isConnected;
+    // das hier sollte in der toggle moonstring methode oder innem enstprechenden delegat stattfinden
+    if (!player.isConnected && player.connectionPossible)
+    {
+      moonConnection.ToggleMoonString2(true);
+      player.isConnected = true;
+    }
+    else if (player.isConnected)
+    {
+      player.isConnected = false;
+      moonConnection.ToggleMoonString2(false);
+    }
+    //player.isConnected = !player.isConnected;  
 
-    if (player.isConnected)
+    //if (player.isConnected)
+    //{
+    //  //toggleConnectionImage.sprite = cutConnection;
+    //}
+    //else
+    //{
+    //  //toggleConnectionImage.sprite = createConnection;
+    //}
+
+    //moonConnection.ToggleMoonString();
+  }
+
+  public void CreateConnection()
+  {
+    if (!player.isConnected && player.connectionPossible)
     {
-      toggleConnectionImage.sprite = cutConnection;
+      player.isConnected = true;
+      moonConnection.ToggleMoonString2(true);
     }
-    else
-    {
-      toggleConnectionImage.sprite = createConnection;
-    }
-    moonConnection.ToggleMoonString();
+  }
+
+  public void CutConnection()
+  {
+    player.isConnected = false;
+    moonConnection.ToggleMoonString2(false);
+  }
+
+  public void GoToMenu()
+  {
+    SceneManager.LoadScene(Constants.MAINMENU);
   }
 }
