@@ -49,7 +49,7 @@ public class MoonConnection : MonoBehaviour
   /// </summary>
   public void MoveMoonstring(float inputValue)
   {
-    moonString.GetComponent<Rigidbody2D>().velocity = new Vector2(inputValue * moonStringSpeed, moonString.GetComponent<Rigidbody2D>().velocity.y);
+    moonString.GetComponent<Rigidbody2D>().velocity = new Vector2(inputValue * moonStringSpeed* Time.deltaTime, moonString.GetComponent<Rigidbody2D>().velocity.y);
   }
 
   /// <summary>
@@ -59,7 +59,7 @@ public class MoonConnection : MonoBehaviour
   {
     // calculate distance between player and moonstring anker (moon)
     float distance = Vector2.Distance(moonString.transform.position, player.transform.position);
-    moonString.transform.localScale = new Vector2(distance * scaleFactor, distance * scaleFactor);
+    moonString.transform.localScale = new Vector2(distance * scaleFactor* Time.deltaTime, distance * scaleFactor* Time.deltaTime);
   }
 
   /// <summary>
