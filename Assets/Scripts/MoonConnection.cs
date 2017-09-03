@@ -59,7 +59,8 @@ public class MoonConnection : MonoBehaviour
   {
     // calculate distance between player and moonstring anker (moon)
     float distance = Vector2.Distance(moonString.transform.position, player.transform.position);
-    moonString.transform.localScale = new Vector2(distance * scaleFactor* Time.deltaTime, distance * scaleFactor* Time.deltaTime);
+    print("moonPos: " + moonString.transform.position + " PlayerPos: " + player.transform.position + " Distanz: " + distance);
+    moonString.transform.localScale = new Vector2(distance * scaleFactor, distance * scaleFactor);
   }
 
   /// <summary>
