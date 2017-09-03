@@ -45,7 +45,8 @@ public class IngameUI : MonoBehaviour
     if (Input.GetButtonDown(Constants.INPUT_TOGGLE_CONNECTION))
       ToggleConnection();
 
-    eneruFilling.transform.position = new Vector3(fillingStartVector.x, player.eneru * 0.5f - Mathf.Abs(fillingStartVector.y) + yOffset, fillingStartVector.z);
+    Vector3 fillingTargetVector = new Vector3(1f, Map(player.eneru, 0f, 100f, 0f, 1f ), 1f);
+    eneruFilling.transform.localScale = Vector3.Lerp(eneruFilling.transform.position, fillingTargetVector, 1f);
   }
 
 
@@ -99,5 +100,10 @@ public class IngameUI : MonoBehaviour
   public void GoToMenu()
   {
     SceneManager.LoadScene(Constants.MAINMENU);
+  }
+
+  private float Map(float value, float min1, float max1, float min2, float max2)
+  {
+    return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
   }
 }
