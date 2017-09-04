@@ -17,8 +17,6 @@ public class IngameUI : MonoBehaviour
   [Header("Eneru")]
   public Text eneruText;
   public Image eneruFilling;
-  public int yPositionEneruFull = -35;
-  public int yPositionEneruEmpty = -75;
   public float yOffset = -50f;
 
   private Image toggleConnectionImage;
